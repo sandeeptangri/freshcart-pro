@@ -2,14 +2,8 @@
 
 WORKDIR /app
 
-# Install build tools for bcrypt
-RUN apt-get update && apt-get install -y \
-    python3 \
-    make \
-    g++ \
-    openssl \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+# Install build tools for bcryptjs (though we switched to pure JS)
+RUN apt-get update && apt-get install -y openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
 RUN npm install
