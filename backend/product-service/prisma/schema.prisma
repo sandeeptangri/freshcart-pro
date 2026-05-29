@@ -34,7 +34,7 @@ model Product {
   description  String
   price        Float
   comparePrice Float?
-n  sku          String   @unique
+  sku          String   @unique
   stock        Int      @default(0)
   images       String[]
   categoryId   String
