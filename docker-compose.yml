@@ -1,0 +1,88 @@
+﻿version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: freshcart-postgres
+    environment:
+      POSTGRES_USER: freshcart
+      POSTGRES_PASSWORD: freshcart123
+      POSTGRES_DB: freshcart
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U freshcart"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - freshcart-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: freshcart-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - freshcart-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: freshcart-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    networks:
+      - freshcart-network
+
+  api-gateway:
+    build: ./backend/api-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - DATABASE_URL=postgresql://freshcart:freshcart123@postgres:5432/freshcart
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=test-secret
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - freshcart-network
+
+  user-service:
+    build: ./backend/user-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - DATABASE_URL=postgresql://freshcart:freshcart123@postgres:5432/freshcart
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - freshcart-network
+
+  web:
+    build: ./frontend/web
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    networks:
+      - freshcart-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  freshcart-network:
+    driver: bridge

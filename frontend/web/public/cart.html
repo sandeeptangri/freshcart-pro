@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshCart Pro - Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #1a1a1a; }
+        
+        /* Header */
+        .header { background: linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF6B35 100%); padding: 12px 0; position: sticky; top: 0; z-index: 100; }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+        .logo { text-decoration: none; }
+        .logo-text { font-size: 32px; font-weight: 800; color: #1a1a1a; letter-spacing: -1px; }
+        .logo-tagline { font-size: 11px; font-weight: 600; color: rgba(0,0,0,0.6); text-transform: uppercase; letter-spacing: 2px; }
+        .cart-btn { background: white; border: none; padding: 10px 20px; border-radius: 8px; display: flex; align-items: center; gap: 8px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .cart-count { background: #FF6B35; color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+        .login-btn { background: #1a1a1a; color: white; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        
+        /* Main Content */
+        .main { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        
+        /* Breadcrumb */
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #666; margin-bottom: 20px; }
+        .breadcrumb a { color: #FF6B35; text-decoration: none; }
+        .breadcrumb span { color: #999; }
+        
+        .page-title { font-size: 28px; font-weight: 700; margin-bottom: 30px; }
+        
+        /* Cart Layout */
+        .cart-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        
+        /* Cart Items */
+        .cart-items { display: flex; flex-direction: column; gap: 15px; }
+        
+        .cart-item { background: white; border-radius: 16px; padding: 20px; display: flex; gap: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .cart-item-image { width: 100px; height: 100px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 50px; flex-shrink: 0; }
+        .cart-item-info { flex: 1; }
+        .cart-item-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+        .cart-item-name { font-size: 16px; font-weight: 600; color: #1a1a1a; text-decoration: none; }
+        .cart-item-name:hover { color: #FF6B35; }
+        .cart-item-weight { color: #666; font-size: 14px; margin-bottom: 15px; }
+        .cart-item-actions { display: flex; justify-content: space-between; align-items: center; }
+        
+        .qty-selector { display: flex; align-items: center; background: #f5f5f5; border-radius: 10px; overflow: hidden; }
+        .qty-selector button { padding: 8px 16px; background: none; border: none; font-size: 18px; cursor: pointer; transition: background 0.2s; }
+        .qty-selector button:hover { background: #e0e0e0; }
+        .qty-selector span { padding: 0 16px; font-weight: 700; }
+        
+        .delete-btn { background: none; border: none; color: #999; cursor: pointer; padding: 8px; transition: color 0.2s; }
+        .delete-btn:hover { color: #e53935; }
+        
+        .cart-item-price { font-size: 18px; font-weight: 700; }
+        
+        /* Add More Link */
+        .add-more { background: white; border: 2px dashed #ddd; border-radius: 16px; padding: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; color: #666; font-weight: 500; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+        .add-more:hover { border-color: #FF6B35; color: #FF6B35; }
+        
+        /* Order Summary */
+        .order-summary { display: flex; flex-direction: column; gap: 20px; }
+        
+        .summary-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .summary-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+        
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 14px; }
+        .summary-row span:first-child { color: #666; }
+        .summary-row.free { color: #00C853; font-weight: 600; }
+        .summary-divider { border-top: 1px solid #eee; margin: 15px 0; }
+        .summary-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: 700; }
+        
+        .free-delivery-note { background: #fff3e0; border-radius: 10px; padding: 12px; margin-top: 15px; font-size: 13px; color: #ef6c00; }
+        
+        /* Address Card */
+        .address-card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .address-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .address-header h3 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .address-icon { width: 36px; height: 36px; background: #fff3e0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .change-btn { color: #FF6B35; font-weight: 600; font-size: 14px; text-decoration: none; }
+        
+        .address-box { background: #f8f9fa; border-radius: 12px; padding: 16px; }
+        .address-box p { font-size: 14px; line-height: 1.6; }
+        .address-default { background: #fff3e0; color: #ef6c00; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-left: auto; }
+        
+        .delivery-time { margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee; font-size: 14px; color: #666; }
+        .delivery-time strong { color: #1a1a1a; }
+        
+        /* Checkout Button */
+        .checkout-btn { background: #00C853; color: white; border: none; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s; text-decoration: none; display: block; text-align: center; }
+        .checkout-btn:hover { background: #00a847; transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cart-layout { grid-template-columns: 1fr; }
+            .order-summary { order: -1; }
+        }
+        @media (max-width: 640px) {
+            .cart-item { flex-direction: column; }
+            .cart-item-image { width: 100%; height: 150px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="demo.html" class="logo">
+                <div class="logo-text">freshcart</div>
+                <div class="logo-tagline">instant delivery</div>
+            </a>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <a href="login.html"><button class="login-btn">Login</button></a>
+                <button class="cart-btn">
+                    🛒 My Cart
+                    <span class="cart-count">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="demo.html">Home</a>
+            <span>›</span>
+            <span style="color: #1a1a1a;">My Cart</span>
+        </div>
+        
+        <h1 class="page-title">My Cart (3 items)</h1>
+        
+        <div class="cart-layout">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                <div class="cart-item">
+                    <div class="cart-item-image">🥛</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-header">
+                            <a href="product-detail.html" class="cart-item-name">Amul Fresh Milk</a>
+                            <button class="delete-btn">🗑️</button>
+                        </div>
+                        <div class="cart-item-weight">500 ml</div>
+                        
+                        <div class="cart-item-actions">
+                            <div class="qty-selector">
+                                <button>−</button>
+                                <span>2</span>
+                                <button>+</button>
+                            </div>
+                            <span class="cart-item-price">₹68</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="cart-item-image">🍞</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-header">
+                            <a href="#" class="cart-item-name">Britannia Bread</a>
+                            <button class="delete-btn">🗑️</button>
+                        </div>
+                        <div class="cart-item-weight">400 g</div>
+                        
+                        <div class="cart-item-actions">
+                            <div class="qty-selector">
+                                <button>−</button>
+                                <span>1</span>
+                                <button>+</button>
+                            </div>
+                            <span class="cart-item-price">₹45</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cart-item">
+                    <div class="cart-item-image">🧈</div>
+                    <div class="cart-item-info">
+                        <div class="cart-item-header">
+                            <a href="#" class="cart-item-name">Amul Butter</a>
+                            <button class="delete-btn">🗑️</button>
+                        </div>
+                        <div class="cart-item-weight">100 g</div>
+                        
+                        <div class="cart-item-actions">
+                            <div class="qty-selector">
+                                <button>−</button>
+                                <span>1</span>
+                                <button>+</button>
+                            </div>
+                            <span class="cart-item-price">₹58</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add More -->
+                <a href="demo.html" class="add-more">
+                    <span>➕</span>
+                    <span>Add more items</span>
+                </a>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <div class="summary-card">
+                    <h2 class="summary-title">Order Summary</h2>
+                    
+                    <div class="summary-row">
+                        <span>Item Total (3 items)</span>
+                        <span>₹171</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Delivery Fee</span>
+                        <span class="free">FREE</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Platform Fee</span>
+                        <span>₹5</span>
+                    </div>
+                    
+                    <div class="summary-divider"></div>
+                    
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span>₹176</span>
+                    </div>
+                </div>
+                
+                <div class="address-card">
+                    <div class="address-header">
+                        <h3>
+                            <span class="address-icon">📍</span>
+                            Delivery Address
+                        </h3>
+                        <a href="#" class="change-btn">Change</a>
+                    </div>
+                    
+                    <div class="address-box">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span style="font-weight: 600;">Home</span>
+                            <span class="address-default">DEFAULT</span>
+                        </div>
+                        <p>123, Sunrise Apartments<br>Koramangala, Bangalore<br>Karnataka - 560034</p>
+                    </div>
+                    
+                    <div class="delivery-time">
+                        Estimated Delivery: <strong>10 minutes</strong>
+                    </div>
+                </div>
+                
+                <a href="checkout.html" class="checkout-btn">
+                    Proceed to Checkout →
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
