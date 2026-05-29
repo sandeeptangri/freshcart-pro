@@ -2,31 +2,21 @@
 import { ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 
-class RegisterDto {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-}
-
-class LoginDto {
-  email: string;
-  password: string;
-}
-
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() data: RegisterDto) {
-    return this.authService.register(data);
+  async register(@Body() body: any) {
+    console.log('Register body:', JSON.stringify(body));
+    return this.authService.register(body);
   }
 
   @Post('login')
-  async login(@Body() data: LoginDto) {
-    return this.authService.login(data);
+  async login(@Body() body: any) {
+    console.log('Login body:', JSON.stringify(body));
+    return this.authService.login(body);
   }
 
   @Get('me')
