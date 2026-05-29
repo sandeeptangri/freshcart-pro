@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -35,8 +35,8 @@ export class AuthService {
     if (!valid) throw new Error('Invalid password');
 
     return {
-      accessToken: 'real-jwt-token-will-be-implemented',
-      refreshToken: 'real-refresh-token',
+      accessToken: 'jwt-token-placeholder',
+      refreshToken: 'refresh-token-placeholder',
       user: {
         id: user.id,
         email: user.email,
