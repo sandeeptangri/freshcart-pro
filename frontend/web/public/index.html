@@ -1,30 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FreshCart - Live Demo</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-body{font-family:'Inter',sans-serif}
-.cat-veg{background:linear-gradient(135deg,#dcfce7 0%,#86efac 100%)}
-.cat-fruits{background:linear-gradient(135deg,#fef3c7 0%,#fcd34d 100%)}
-.cat-dairy{background:linear-gradient(135deg,#dbeafe 0%,#93c5fd 100%)}
-.cat-bev{background:linear-gradient(135deg,#ede9fe 0%,#c4b5fd 100%)}
-.prod-tomatoes{background:linear-gradient(135deg,#fee2e2 0%,#fca5a5 100%)}
-.prod-spinach{background:linear-gradient(135deg,#d1fae5 0%,#6ee7b7 100%)}
-.prod-apples{background:linear-gradient(135deg,#fef3c7 0%,#fcd34d 100%)}
-.icon-big{font-size:4rem}
-</style>
+<style>body{font-family:'Inter',sans-serif}</style>
 </head>
 <body class="bg-gray-50">
+<!-- Navigation -->
 <nav class="bg-white shadow-sm sticky top-0 z-50">
 <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
 <div class="flex items-center space-x-2">
-<div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-lg flex items-center justify-center text-white text-xl">??</div>
+<span class="text-2xl">&#129382;</span>
 <span class="text-xl font-bold text-emerald-700">FreshCart</span>
-<span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">LIVE API</span>
+<span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">LIVE</span>
 </div>
 <div class="flex items-center space-x-4">
 <input type="text" id="searchInput" placeholder="Search products..." class="px-4 py-2 border border-gray-300 rounded-lg w-64 focus:outline-none focus:ring-2 focus:ring-emerald-500">
@@ -38,20 +28,15 @@ body{font-family:'Inter',sans-serif}
 </div>
 </nav>
 
+<!-- Hero -->
 <section class="bg-gradient-to-br from-emerald-600 to-emerald-800 text-white py-16">
-<div class="max-w-7xl mx-auto px-4">
-<div class="max-w-2xl">
-<h1 class="text-4xl font-bold mb-4">Fresh Groceries Delivery ??</h1>
+<div class="max-w-7xl mx-auto px-4 text-center">
+<h1 class="text-4xl font-bold mb-4">Fresh Groceries Delivery</h1>
 <p class="text-emerald-100 text-lg mb-6">Connected to LIVE production APIs!</p>
-<div class="flex flex-wrap gap-2 text-sm">
-<span class="bg-white/20 px-3 py-1 rounded-full">? PostgreSQL Database</span>
-<span class="bg-white/20 px-3 py-1 rounded-full">? Render Cloud</span>
-<span class="bg-white/20 px-3 py-1 rounded-full">? User Auth</span>
-</div>
-</div>
 </div>
 </section>
 
+<!-- Categories -->
 <section class="py-12">
 <div class="max-w-7xl mx-auto px-4">
 <h2 class="text-2xl font-bold mb-6">Categories</h2>
@@ -59,6 +44,7 @@ body{font-family:'Inter',sans-serif}
 </div>
 </section>
 
+<!-- Products -->
 <section class="py-12 bg-white">
 <div class="max-w-7xl mx-auto px-4">
 <h2 class="text-2xl font-bold mb-6">Featured Products</h2>
@@ -66,11 +52,12 @@ body{font-family:'Inter',sans-serif}
 </div>
 </section>
 
+<!-- Modals -->
 <div id="authModal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
 <div class="bg-white rounded-xl p-8 max-w-md w-full m-4">
 <div class="flex justify-between items-center mb-6">
 <h3 id="authTitle" class="text-xl font-bold">Login</h3>
-<button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 text-xl">?</button>
+<button onclick="closeAuthModal()" class="text-gray-400 hover:text-gray-600 text-xl">&#10005;</button>
 </div>
 <form id="authForm" onsubmit="handleAuth(event)">
 <div class="space-y-4">
@@ -80,10 +67,10 @@ body{font-family:'Inter',sans-serif}
 </div>
 <input type="email" id="email" placeholder="Email" required class="w-full px-4 py-2 border rounded-lg">
 <input type="password" id="password" placeholder="Password" required class="w-full px-4 py-2 border rounded-lg">
-<button type="submit" id="authSubmit" class="w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700">Login</button>
+<button type="submit" id="authSubmit" class="w-full bg-emerald-600 text-white py-2 rounded-lg">Login</button>
 </div>
 </form>
-<p id="authResult" class="mt-4 text-sm text-center"></p>
+<p id="authResult" class="mt-4 text-center"></p>
 </div>
 </div>
 
@@ -91,82 +78,192 @@ body{font-family:'Inter',sans-serif}
 <div class="p-6 h-full flex flex-col">
 <div class="flex justify-between items-center mb-6">
 <h3 class="text-xl font-bold">Shopping Cart</h3>
-<button onclick="hideCart()" class="text-gray-400 hover:text-gray-600 text-xl">?</button>
+<button onclick="hideCart()" class="text-gray-400 hover:text-gray-600 text-xl">&#10005;</button>
 </div>
 <div id="cartItems" class="flex-1 overflow-auto"><p class="text-gray-500 text-center py-8">Your cart is empty</p></div>
 <div class="border-t pt-4 mt-4">
-<div class="flex justify-between mb-4"><span class="font-semibold">Total:</span><span id="cartTotal" class="font-bold text-emerald-600">?0</span></div>
+<div class="flex justify-between mb-4"><span class="font-semibold">Total:</span><span id="cartTotal" class="font-bold text-emerald-600">&#8377;0</span></div>
 <button class="w-full bg-emerald-600 text-white py-3 rounded-lg hover:bg-emerald-700">Checkout</button>
 </div>
 </div>
 </div>
 
 <script>
+// API Configuration
 const API = { USER: 'https://freshcart-user-service.onrender.com/api/v1', PRODUCT: 'https://freshcart-product-service.onrender.com/api/v1' };
-const catStyles = { 'fresh-vegetables':['cat-veg','??'], 'fruits':['cat-fruits','??'], 'dairy-eggs':['cat-dairy','??'], 'beverages':['cat-bev','??'] };
-const prodStyles = { 'VEG-TOM-001':['prod-tomatoes','??'], 'VEG-SPN-001':['prod-spinach','??'], 'FRU-APL-001':['prod-apples','??'] };
-let cart = JSON.parse(localStorage.getItem('fcart')||'[]'), authMode='login';
 
-async function load() {
+// Use HTML entities for emojis to avoid encoding issues
+const emojis = {
+  veg: '&#129382;', fruits: '&#127822;', dairy: '&#129371;', bev: '&#129380;',
+  tomato: '&#127813;', spinach: '&#129382;', apple: '&#127822;'
+};
+
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let currentMode = 'login';
+
+// Category styles (using Tailwind classes + background gradients)
+const catStyles = {
+  'fresh-vegetables': ['bg-gradient-to-br from-green-200 to-green-400', emojis.veg, 'Vegetables'],
+  'fruits': ['bg-gradient-to-br from-yellow-200 to-yellow-400', emojis.fruits, 'Fruits'],
+  'dairy-eggs': ['bg-gradient-to-br from-blue-200 to-blue-400', emojis.dairy, 'Dairy'],
+  'beverages': ['bg-gradient-to-br from-purple-200 to-purple-400', emojis.bev, 'Drinks']
+};
+
+const prodStyles = {
+  'VEG-TOM-001': ['bg-gradient-to-br from-red-200 to-red-400', emojis.tomato],
+  'VEG-SPN-001': ['bg-gradient-to-br from-green-200 to-emerald-400', emojis.spinach],
+  'FRU-APL-001': ['bg-gradient-to-br from-red-200 to-yellow-400', emojis.apple]
+};
+
+async function init() {
   try {
-    const [p,c]=await Promise.all([fetch(`${API.PRODUCT}/products`).then(r=>r.json()),fetch(`${API.PRODUCT}/products/categories`).then(r=>r.json())]);
-    renderProds(p); renderCats(c);
-  } catch(e){ console.error(e); }
+    const [prods, cats] = await Promise.all([
+      fetch(`${API.PRODUCT}/products`).then(r => r.json()),
+      fetch(`${API.PRODUCT}/products/categories`).then(r => r.json())
+    ]);
+    renderProducts(prods);
+    renderCategories(cats);
+  } catch(e) {
+    document.getElementById('productsContainer').innerHTML = '<p class="text-center text-red-500">Failed to load products</p>';
+  }
 }
 
-function renderProds(products) {
-  document.getElementById('productsContainer').innerHTML = products.map(p=>{
-    const [cls,emoji]=prodStyles[p.sku]||['cat-veg','??'];
-    return `<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">
-      <div class="${cls} h-48 flex items-center justify-center"><span class="icon-big">${emoji}</span></div>
-      <div class="p-4">
-        <div class="text-emerald-600 text-xs font-medium mb-1">${p.category?.name}</div>
-        <h3 class="font-semibold text-lg mb-1">${p.name}</h3>
-        <p class="text-sm text-gray-600 mb-3">${p.description}</p>
-        <div class="flex justify-between items-center">
-          <div>
-            <span class="text-2xl font-bold">?${p.price}</span>
-            <div class="text-sm text-gray-500">?? ${p.rating} (${p.reviewCount})</div>
-          </div>
-          <button onclick="addCart('${p.id}','${p.name.replace(/'/g,"\'")}',${p.price},'${p.sku}')" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Add</button>
-        </div>
-      </div>
-    </div>`;
+function renderProducts(products) {
+  const container = document.getElementById('productsContainer');
+  container.innerHTML = products.map(p => {
+    const style = prodStyles[p.sku] || ['bg-gray-200', emojis.veg];
+    return '<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100">' +
+      '<div class="' + style[0] + ' h-48 flex items-center justify-center">' +
+      '<span class="text-6xl">' + style[1] + '</span>' +
+      '</div>' +
+      '<div class="p-4">' +
+      '<div class="text-emerald-600 text-xs font-medium mb-1">' + (p.category?.name || 'Item') + '</div>' +
+      '<h3 class="font-semibold text-lg mb-1">' + p.name + '</h3>' +
+      '<p class="text-sm text-gray-600 mb-3">' + p.description + '</p>' +
+      '<div class="flex justify-between items-center">' +
+      '<div>' +
+      '<span class="text-2xl font-bold">&#8377;' + p.price + '</span>' +
+      '<div class="text-sm text-gray-500">&#11088; ' + p.rating + ' (' + p.reviewCount + ')</div>' +
+      '</div>' +
+      '<button onclick="addCart(\'' + p.id + '\',\'' + p.name + '\',' + p.price + ',\'' + p.sku + '\')" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Add</button>' +
+      '</div>' +
+      '</div>' +
+      '</div>';
   }).join('');
 }
 
-function renderCats(categories) {
-  document.getElementById('categoriesContainer').innerHTML = categories.map(c=>{
-    const [cls,emoji]=catStyles[c.slug]||['cat-veg','??'];
-    return `<div class="bg-white rounded-lg p-4 shadow-sm cursor-pointer hover:shadow-md ${cls}">
-      <div class="h-24 flex items-center justify-center mb-2"><span class="text-5xl">${emoji}</span></div>
-      <h3 class="font-semibold text-center">${c.name}</h3>
-<p class="text-sm text-center font-medium text-emerald-700">${c._count?.products||0} items</p>
-    </div>`;
+function renderCategories(categories) {
+  const container = document.getElementById('categoriesContainer');
+  container.innerHTML = categories.map(c => {
+    const style = catStyles[c.slug] || ['bg-gray-200', emojis.veg, 'Category'];
+return '<div class="bg-white rounded-lg p-4 shadow-sm cursor-pointer hover:shadow-md">' +
+      '<div class="' + style[0] + ' h-24 rounded mb-2 flex items-center justify-center">' +
+      '<span class="text-4xl">' + style[1] + '</span>' +
+      '</div>' +
+      '<h3 class="font-semibold text-center">' + c.name + '</h3>' +
+      '<p class="text-xs text-emerald-600 text-center font-medium">' + (c._count?.products || 0) + ' items</p>' +
+      '</div>';
   }).join('');
 }
 
-function addCart(id,name,price,sku){let ex=cart.find(i=>i.id===id);if(ex)ex.q++;else cart.push({id,name,price,sku,q:1});localStorage.setItem('fcart',JSON.stringify(cart));updCart();showCart();}
-function updCart(){document.getElementById('cartCount').textContent=cart.reduce((s,i)=>s+i.q,0);let ci=document.getElementById('cartItems');if(!cart.length)ci.innerHTML='<p class="text-gray-500 text-center py-8">Your cart is empty</p>';else ci.innerHTML=cart.map(i=>`<div class="flex items-center py-2 border-b"><div class="w-12 h-12 ${prodStyles[i.sku]?.[0]||'cat-veg'} rounded flex items-center justify-center text-2xl">${prodStyles[i.sku]?.[1]||'??'}</div><div class="ml-3 flex-1"><h4 class="font-medium text-sm">${i.name}</h4><p class="text-emerald-600">?${i.price} ? ${i.q}</p></div><button onclick="remCart('${i.id}')" class="text-red-500 font-bold px-2">?</button></div>`).join('');document.getElementById('cartTotal').textContent='?'+cart.reduce((s,i)=>s+(i.price*i.q),0);}
-function remCart(id){cart=cart.filter(i=>i.id!==id);localStorage.setItem('fcart',JSON.stringify(cart));updCart();}
-function showCart(){document.getElementById('cartSidebar').classList.remove('hidden');setTimeout(()=>document.getElementById('cartSidebar').classList.remove('translate-x-full'),10);}
-function hideCart(){document.getElementById('cartSidebar').classList.add('translate-x-full');setTimeout(()=>document.getElementById('cartSidebar').classList.add('hidden'),300);}
-function showAuthModal(m){authMode=m;document.getElementById('authTitle').textContent=m=='login'?'Login':'Register';document.getElementById('authSubmit').textContent=m=='login'?'Login':'Sign Up';document.getElementById('registerFields').classList.toggle('hidden',m=='login');document.getElementById('authResult').textContent='';document.getElementById('authModal').classList.remove('hidden');}
-function closeAuthModal(){document.getElementById('authModal').classList.add('hidden');}
-async function handleAuth(e){
+function addCart(id, name, price, sku) {
+  const existing = cart.find(i => i.id === id);
+  if (existing) existing.q++;
+  else cart.push({ id, name, price, sku, q: 1 });
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartUI();
+  showCart();
+}
+
+function updateCartUI() {
+  document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.q, 0);
+  const ci = document.getElementById('cartItems');
+  if (!cart.length) {
+    ci.innerHTML = '<p class="text-gray-500 text-center py-8">Your cart is empty</p>';
+  } else {
+    ci.innerHTML = cart.map(i => {
+      const style = prodStyles[i.sku] || ['bg-gray-200', emojis.veg];
+      return '<div class="flex items-center py-2 border-b">' +
+        '<div class="w-12 h-12 ' + style[0] + ' rounded flex items-center justify-center text-2xl">' + style[1] + '</div>' +
+        '<div class="ml-3 flex-1">' +
+        '<h4 class="font-medium text-sm">' + i.name + '</h4>' +
+        '<p class="text-emerald-600">&#8377;' + i.price + ' &times; ' + i.q + '</p>' +
+        '</div>' +
+        '<button onclick="removeCart(\'' + i.id + '\')" class="text-red-500 font-bold px-2">&#10005;</button>' +
+        '</div>';
+    }).join('');
+  }
+  document.getElementById('cartTotal').textContent = '&#8377;' + cart.reduce((s, i) => s + (i.price * i.q), 0);
+}
+
+function removeCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  updateCartUI();
+}
+
+function showCart() {
+  document.getElementById('cartSidebar').classList.remove('hidden');
+  setTimeout(() => document.getElementById('cartSidebar').classList.remove('translate-x-full'), 10);
+}
+
+function hideCart() {
+  document.getElementById('cartSidebar').classList.add('translate-x-full');
+  setTimeout(() => document.getElementById('cartSidebar').classList.add('hidden'), 300);
+}
+
+function showAuthModal(mode) {
+  currentMode = mode;
+  document.getElementById('authTitle').textContent = mode === 'login' ? 'Login' : 'Register';
+  document.getElementById('authSubmit').textContent = mode === 'login' ? 'Login' : 'Sign Up';
+  document.getElementById('registerFields').classList.toggle('hidden', mode === 'login');
+  document.getElementById('authModal').classList.remove('hidden');
+}
+
+function closeAuthModal() {
+  document.getElementById('authModal').classList.add('hidden');
+}
+
+async function handleAuth(e) {
   e.preventDefault();
-  const em=document.getElementById('email').value,pw=document.getElementById('password').value,re=document.getElementById('authResult');
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const result = document.getElementById('authResult');
+
   try {
-    let url=`${API.USER}/auth/${authMode=='login'?'login':'register'}`,body={email:em,password:pw};
-    if(authMode!='login'){body.firstName=document.getElementById('firstName').value;body.lastName=document.getElementById('lastName').value;}
-    const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    const d=await r.json();
-    if(d.accessToken||d.id){re.textContent=authMode=='login'?'? Logged in!':'? Account created!';re.className='mt-4 text-center text-green-600 font-medium';setTimeout(closeAuthModal,1500);}
-    else{re.textContent=d.message||'Error';re.className='mt-4 text-center text-red-600';}
-  } catch(err){re.textContent='Error: '+err.message;re.className='mt-4 text-center text-red-600';}
+    const url = API.USER + '/auth/' + (currentMode === 'login' ? 'login' : 'register');
+    const body = { email, password };
+    if (currentMode !== 'login') {
+      body.firstName = document.getElementById('firstName').value;
+      body.lastName = document.getElementById('lastName').value;
+    }
+    const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+    const d = await r.json();
+    if (d.accessToken || d.id) {
+      result.textContent = currentMode === 'login' ? '&#10004; Logged in!' : '&#10004; Account created!';
+      result.className = 'mt-4 text-center text-green-600 font-medium';
+      setTimeout(closeAuthModal, 1500);
+    } else {
+      result.textContent = d.message || 'Error occurred';
+      result.className = 'mt-4 text-center text-red-600';
+    }
+  } catch (err) {
+    result.textContent = 'Error: ' + err.message;
+    result.className = 'mt-4 text-center text-red-600';
+  }
 }
-document.getElementById('searchInput')?.addEventListener('input',e=>{const t=e.target.value.toLowerCase();document.querySelectorAll('#productsContainer>div').forEach(c=>c.style.display=c.textContent.toLowerCase().includes(t)?'':'none');});
-load();updCart();
+
+// Search functionality
+document.getElementById('searchInput')?.addEventListener('input', e => {
+  const term = e.target.value.toLowerCase();
+  document.querySelectorAll('#productsContainer > div').forEach(c => {
+    c.style.display = c.textContent.toLowerCase().includes(term) ? '' : 'none';
+  });
+});
+
+// Initialize
+init();
+updateCartUI();
 </script>
 </body>
 </html>
