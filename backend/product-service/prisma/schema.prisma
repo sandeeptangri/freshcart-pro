@@ -1,10 +1,20 @@
-generator client {
+﻿generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Category {
@@ -19,19 +29,19 @@ model Category {
 }
 
 model Product {
-  id          String    @id @default(uuid())
-  name        String
-  description String
-  price       Float
+  id           String   @id @default(uuid())
+  name         String
+  description  String
+  price        Float
   comparePrice Float?
-  sku         String    @unique
-  stock       Int       @default(0)
-  images      String[]
-  categoryId  String
-  category    Category  @relation(fields: [categoryId], references: [id])
-  featured    Boolean   @default(false)
-  rating      Float     @default(0)
-  reviewCount Int       @default(0)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+n  sku          String   @unique
+  stock        Int      @default(0)
+  images       String[]
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  featured     Boolean  @default(false)
+  rating       Float    @default(0)
+  reviewCount  Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
