@@ -1,0 +1,30 @@
+﻿services:
+  - type: web
+    name: freshcart-order-service
+    runtime: node
+    rootDir: backend/order-service
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: freshcart-payment-service
+    runtime: node
+    rootDir: backend/payment-service
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: web
+    name: freshcart-notification-service
+    runtime: node
+    rootDir: backend/notification-service
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
