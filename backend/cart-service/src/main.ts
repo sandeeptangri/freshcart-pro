@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+﻿import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -7,6 +7,6 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   const port = process.env.PORT || 3003;
   await app.listen(port);
-  console.log(Cart Service running on port );
+  console.log('Cart Service running on port ' + port);
 }
 bootstrap();

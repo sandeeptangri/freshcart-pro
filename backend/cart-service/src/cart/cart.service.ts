@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+﻿import { Injectable } from '@nestjs/common';
 import Redis from 'ioredis';
 
 @Injectable()
@@ -10,20 +10,20 @@ export class CartService {
   }
 
   async getCart(userId: string) {
-    const cart = await this.redis.get(cart:);
+    const cart = await this.redis.get('cart:' + userId);
     return cart ? JSON.parse(cart) : { items: [], total: 0 };
   }
 
   async addItem(userId: string, item: any) {
     const cart = await this.getCart(userId);
     cart.items.push(item);
-cart.total += item.price * item.quantity;
-    await this.redis.set(cart:, JSON.stringify(cart));
+    cart.total += item.price * item.quantity;
+    await this.redis.set('cart:' + userId, JSON.stringify(cart));
     return cart;
   }
 
   async clearCart(userId: string) {
-    await this.redis.del(cart:);
+    await this.redis.del('cart:' + userId);
     return { message: 'Cart cleared' };
   }
 }
