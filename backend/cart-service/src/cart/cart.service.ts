@@ -1,29 +1,51 @@
-﻿import { Injectable } from '@nestjs/common';
+﻿import { Injectable, OnModuleInit } from '@nestjs/common';
 import Redis from 'ioredis';
 
 @Injectable()
-export class CartService {
-  private redis: Redis;
+export class CartService implements OnModuleInit {
+  private redis: Redis | null = null;
+  private memoryStore = new Map<string, any>();
 
-  constructor() {
-    this.redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
+  onModuleInit() {
+    const redisUrl = process.env.REDIS_URL;
+    if (redisUrl) {
+      try {
+        this.redis = new Redis(redisUrl);
+        console.log('Connected to Redis');
+      } catch (err: any) {
+        console.warn('Redis failed, using memory:', err.message);
+      }
+    } else {
+      console.log('REDIS_URL not set, using in-memory store');
+    }
   }
 
   async getCart(userId: string) {
-    const cart = await this.redis.get('cart:' + userId);
-    return cart ? JSON.parse(cart) : { items: [], total: 0 };
+    const key = 'cart:' + userId;
+    if (this.redis) {
+      const cart = await this.redis.get(key);
+      return cart ? JSON.parse(cart) : { items: [], total: 0 };
+    }
+    return this.memoryStore.get(key) || { items: [], total: 0 };
   }
 
   async addItem(userId: string, item: any) {
     const cart = await this.getCart(userId);
     cart.items.push(item);
-    cart.total += item.price * item.quantity;
-    await this.redis.set('cart:' + userId, JSON.stringify(cart));
+    cart.total += (item.price || 0) * (item.quantity || 1);
+    const key = 'cart:' + userId;
+    if (this.redis) {
+      await this.redis.set(key, JSON.stringify(cart));
+    } else {
+      this.memoryStore.set(key, cart);
+    }
     return cart;
   }
 
   async clearCart(userId: string) {
-    await this.redis.del('cart:' + userId);
+    const key = 'cart:' + userId;
+    if (this.redis) await this.redis.del(key);
+    else this.memoryStore.delete(key);
     return { message: 'Cart cleared' };
   }
 }
