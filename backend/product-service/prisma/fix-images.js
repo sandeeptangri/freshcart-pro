@@ -1,21 +1,32 @@
 ﻿const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-const imageUpdates = {
-  'VEG-TOM-001': 'https://images.unsplash.com/photo-1592924357228-91a46a0d04c0?w=400&h=300&fit=crop',
-  'VEG-SPN-001': 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&h=300&fit=crop',
-  'FRU-APL-001': 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=400&h=300&fit=crop'
-};
-
 async function fixImages() {
-  for (const [sku, imageUrl] of Object.entries(imageUpdates)) {
-    await prisma.product.updateMany({
-      where: { sku },
-      data: { images: [imageUrl] }
-    });
-    console.log(`Updated ${sku}`);
-  }
-  console.log('Done!');
+  // Update categories
+  await prisma.category.updateMany({
+    where: { slug: 'fresh-vegetables' },
+    data: { image: 'https://placehold.co/400x300/10B981/FFFFFF/png?text=Vegetables' }
+  });
+  await prisma.category.updateMany({
+    where: { slug: 'fruits' },
+    data: { image: 'https://placehold.co/400x300/F59E0B/FFFFFF/png?text=Fruits' }
+  });
+  
+  // Update products
+  await prisma.product.updateMany({
+    where: { sku: 'VEG-TOM-001' },
+    data: { images: ['https://placehold.co/400x300/EF4444/FFFFFF/png?text=Tomatoes'] }
+  });
+  await prisma.product.updateMany({
+    where: { sku: 'VEG-SPN-001' },
+    data: { images: ['https://placehold.co/400x300/10B981/FFFFFF/png?text=Spinach'] }
+  });
+  await prisma.product.updateMany({
+    where: { sku: 'FRU-APL-001' },
+    data: { images: ['https://placehold.co/400x300/F59E0B/FFFFFF/png?text=Apples'] }
+  });
+  
+  console.log('Images updated!');
 }
 
 fixImages().finally(() => prisma.$disconnect());
