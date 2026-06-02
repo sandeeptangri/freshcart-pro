@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.DS_Store
+*.log
+.env.local
+.env.development
+.env.test
+.hermes
+.cache
+coverage
