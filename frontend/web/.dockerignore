@@ -9,3 +9,11 @@ node_modules
 .hermes
 .cache
 coverage
+node_modules
+.next
+.git
+.DS_Store
+*.log
+.env.local
+.env.development
+.env.test
