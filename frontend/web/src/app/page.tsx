@@ -26,7 +26,7 @@ const products: any = [
   { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', time: '8 min', price: 45 },
   { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', time: '8 min', price: 58 },
   { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', time: '8 min', price: 72 },
-  { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', time: '10 mins', price: 185, time: '10 min' },
+  { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', time: '10 min', price: 185 },
   { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', time: '8 min', price: 80 },
 ]
 
