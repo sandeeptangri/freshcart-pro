@@ -1,0 +1,9 @@
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+# Debug - verify files exist
+RUN echo "=== Contents of src/components ===" && ls -la src/components/ && echo "=== Contents of src/store ===" && ls -la src/store/ && echo "=== Contents of src ===" && ls -la src/
+RUN cat tsconfig.json | head -20
+RUN npm run build
