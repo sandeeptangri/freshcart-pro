@@ -1,4 +1,4 @@
-/ Base API URL - configurable for different environments
+// Base API URL - configurable for different environments
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api/v1'
 
 interface ApiConfig {

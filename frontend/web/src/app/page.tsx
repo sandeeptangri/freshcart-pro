@@ -22,12 +22,12 @@ const categories = [
 ]
 
 const products: any = [
-  { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', time: '10 mins', price: 34, time: '8 min' },
-  { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', time: '10 mins', price: 45, time: '8 min' },
-  { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', time: '10 mins', price: 58, time: '8 min' },
-  { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', time: '10 mins', price: 72, time: '8 min' },
+  { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', time: '8 min', price: 34 },
+  { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', time: '8 min', price: 45 },
+  { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', time: '8 min', price: 58 },
+  { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', time: '8 min', price: 72 },
   { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', time: '10 mins', price: 185, time: '10 min' },
-  { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', time: '10 mins', price: 80, time: '8 min' },
+  { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', time: '8 min', price: 80 },
 ]
 
 const serviceBanners = [
@@ -250,12 +250,12 @@ export default function Home() {
         
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { id: 'f1', icon: '🍎', name: 'Fresh Apples', weight: '500 g', time: '10 mins', price: 149, time: '12 min' },
-            { id: 'f2', icon: '🍌', name: 'Bananas', weight: '1 dozen', time: '10 mins', price: 60, time: '12 min' },
-            { id: 'f3', icon: '🍅', name: 'Fresh Tomatoes', weight: '500 g', time: '10 mins', price: 35, time: '12 min' },
-            { id: 'f4', icon: '🥔', name: 'Fresh Potatoes', weight: '1 kg', time: '10 mins', price: 45, time: '12 min' },
-            { id: 'f5', icon: '🧅', name: 'Fresh Onions', weight: '1 kg', time: '10 mins', price: 55, time: '12 min' },
-            { id: 'f6', icon: '🥕', name: 'Fresh Carrots', weight: '500 g', time: '10 mins', price: 28, time: '12 min' },
+            { id: 'f1', icon: '🍎', name: 'Fresh Apples', weight: '500 g', time: '12 min', price: 149 },
+            { id: 'f2', icon: '🍌', name: 'Bananas', weight: '1 dozen', time: '12 min', price: 60 },
+            { id: 'f3', icon: '🍅', name: 'Fresh Tomatoes', weight: '500 g', time: '12 min', price: 35 },
+            { id: 'f4', icon: '🥔', name: 'Fresh Potatoes', weight: '1 kg', time: '12 min', price: 45 },
+            { id: 'f5', icon: '🧅', name: 'Fresh Onions', weight: '1 kg', time: '12 min', price: 55 },
+            { id: 'f6', icon: '🥕', name: 'Fresh Carrots', weight: '500 g', time: '12 min', price: 28 },
           ].map((product) => {
             const FQuantitySelector = () => {
               const cartItem = items.find(item => item.id === product.id)
