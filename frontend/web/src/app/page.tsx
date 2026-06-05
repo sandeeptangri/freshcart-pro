@@ -22,12 +22,12 @@ const categories = [
 ]
 
 const products: any = [
-  { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', time: '8 min', price: 34 },
-  { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', time: '8 min', price: 45 },
-  { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', time: '8 min', price: 58 },
-  { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', time: '8 min', price: 72 },
-  { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', time: '10 min', price: 185 },
-  { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', time: '8 min', price: 80 },
+  { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', deliveryTime: '8 min', price: 34 },
+  { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', deliveryTime: '8 min', price: 45 },
+  { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', deliveryTime: '8 min', price: 58 },
+  { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', deliveryTime: '8 min', price: 72 },
+  { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', deliveryTime: '10 min', price: 185 },
+  { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', deliveryTime: '8 min', price: 80 },
 ]
 
 const serviceBanners = [
@@ -221,7 +221,7 @@ export default function Home() {
               <div className="relative h-32 sm:h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-4xl sm:text-5xl">
                 {product.icon}
                 <span className="absolute bottom-2 left-2 bg-green-500 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full">
-                  {product.time}
+                  {product.deliveryTime}
                 </span>
               </div>
               <div className="p-3 sm:p-4">
@@ -250,13 +250,13 @@ export default function Home() {
         
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { id: 'f1', icon: '🍎', name: 'Fresh Apples', weight: '500 g', time: '12 min', price: 149 },
-            { id: 'f2', icon: '🍌', name: 'Bananas', weight: '1 dozen', time: '12 min', price: 60 },
-            { id: 'f3', icon: '🍅', name: 'Fresh Tomatoes', weight: '500 g', time: '12 min', price: 35 },
-            { id: 'f4', icon: '🥔', name: 'Fresh Potatoes', weight: '1 kg', time: '12 min', price: 45 },
-            { id: 'f5', icon: '🧅', name: 'Fresh Onions', weight: '1 kg', time: '12 min', price: 55 },
-            { id: 'f6', icon: '🥕', name: 'Fresh Carrots', weight: '500 g', time: '12 min', price: 28 },
-          ].map((product) => {
+            { id: 'f1', icon: '🍎', name: 'Fresh Apples', weight: '500 g', deliveryTime: '12 min', price: 149 },
+            { id: 'f2', icon: '🍌', name: 'Bananas', weight: '1 dozen', deliveryTime: '12 min', price: 60 },
+            { id: 'f3', icon: '🍅', name: 'Fresh Tomatoes', weight: '500 g', deliveryTime: '12 min', price: 35 },
+            { id: 'f4', icon: '🥔', name: 'Fresh Potatoes', weight: '1 kg', deliveryTime: '12 min', price: 45 },
+            { id: 'f5', icon: '🧅', name: 'Fresh Onions', weight: '1 kg', deliveryTime: '12 min', price: 55 },
+            { id: 'f6', icon: '🥕', name: 'Fresh Carrots', weight: '500 g', deliveryTime: '12 min', price: 28 },
+          ].map((product: ProductItem) => {
             const FQuantitySelector = () => {
               const cartItem = items.find(item => item.id === product.id)
               
@@ -298,7 +298,7 @@ export default function Home() {
                 <div className="relative h-32 sm:h-36 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-4xl sm:text-5xl">
                   {product.icon}
                   <span className="absolute bottom-2 left-2 bg-green-500 text-white text-[10px] sm:text-xs font-bold px-2 py-1 rounded-full">
-                    {product.time}
+                    {product.deliveryTime}
                   </span>
                 </div>
                 <div className="p-3 sm:p-4">
@@ -400,3 +400,4 @@ export default function Home() {
     </main>
   )
 }
+

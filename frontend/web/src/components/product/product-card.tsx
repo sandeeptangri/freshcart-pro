@@ -22,7 +22,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addItem, items, updateQuantity } = useCartStore()
+  const { addItem, items, updateQty } = useCartStore()
   
   const cartItem = items.find(item => item.productId === product.id)
   const quantity = cartItem?.quantity || 0
@@ -91,7 +91,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 <Button 
                   variant="outline" 
                   size="icon"
-                  onClick={() => updateQuantity(product.id, quantity - 1)}
+                  onClick={() => updateQty(product.id, -1)}
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
@@ -99,7 +99,7 @@ export function ProductCard({ product }: ProductCardProps) {
                 <Button 
                   variant="outline" 
                   size="icon"
-                  onClick={() => updateQuantity(product.id, quantity + 1)}
+                  onClick={() => updateQty(product.id, 1)}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -111,3 +111,4 @@ export function ProductCard({ product }: ProductCardProps) {
     </Card>
   )
 }
+
