@@ -24,8 +24,8 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem, items, updateQty } = useCartStore()
   
-  const cartItem = items.find(item => item.productId === product.id)
-  const quantity = cartItem?.quantity || 0
+  const cartItem = items.find(item => item.id === product.id)
+  const quantity = cartItem?.qty || 0
   
   const discount = product.mrp > product.sellingPrice 
     ? Math.round(((product.mrp - product.sellingPrice) / product.mrp) * 100)
@@ -111,4 +111,5 @@ export function ProductCard({ product }: ProductCardProps) {
     </Card>
   )
 }
+
 
