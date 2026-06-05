@@ -33,7 +33,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const discount = mrp > price ? Math.round(((mrp - price) / mrp) * 100) : 0
   
   const handleAddToCart = () => {
-    addItem({ id: product.id, icon: "", name: product.name, weight: "", price: price, qty: quantity })
+    addItem({ id: product.id, icon: "", name: product.name, weight: "", price: price })
   }
 
   return (
