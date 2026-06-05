@@ -82,7 +82,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <Button 
                 variant="outline" 
                 className="w-full"
-                onClick={() => addItem(product.id, 1)}
+                onClick={() => addItem({ id: product.id, icon: "", name: product.name, weight: "", price: product.sellingPrice })}
               >
                 Add to Cart
               </Button>
