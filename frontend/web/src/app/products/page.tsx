@@ -1,5 +1,7 @@
 import { ProductGrid } from '@/components/product/product-grid'
 
+export const dynamic = 'force-dynamic'
+
 export default function ProductsPage() {
   return (
     <div className="container px-4 py-8">
