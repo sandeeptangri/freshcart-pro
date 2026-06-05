@@ -21,6 +21,16 @@ const categories = [
   { icon: '🌶️', name: 'Masala & Oil' },
 ]
 
+
+interface ProductItem {
+  id: string
+  icon: string
+  name: string
+  weight: string
+  price: number
+  deliveryTime: string
+}
+
 const products: any = [
   { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', deliveryTime: '8 min', price: 34 },
   { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', deliveryTime: '8 min', price: 45 },
