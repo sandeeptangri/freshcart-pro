@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Header from '@/components/Header'
 import Link from 'next/link'
@@ -7,18 +7,18 @@ import { useCartStore } from '@/store/cart-store'
 import { useToast, ToastContainer } from '@/components/Toast'
 
 const categories = [
-  { icon: '🍃', name: 'Paan Corner' },
-  { icon: '🥛', name: 'Dairy & Bread' },
-  { icon: '🥬', name: 'Vegetables' },
-  { icon: '🍊', name: 'Fruits' },
-  { icon: '🥤', name: 'Cold Drinks' },
-  { icon: '🍿', name: 'Snacks' },
-  { icon: '🍜', name: 'Instant Food' },
-  { icon: '🍰', name: 'Sweet Tooth' },
-  { icon: '🍪', name: 'Bakery' },
-  { icon: '☕', name: 'Tea & Coffee' },
-  { icon: '🍚', name: 'Rice & Atta' },
-  { icon: '🌶️', name: 'Masala & Oil' },
+  { icon: 'ðŸƒ', name: 'Paan Corner' },
+  { icon: 'ðŸ¥›', name: 'Dairy & Bread' },
+  { icon: 'ðŸ¥¬', name: 'Vegetables' },
+  { icon: 'ðŸŠ', name: 'Fruits' },
+  { icon: 'ðŸ¥¤', name: 'Cold Drinks' },
+  { icon: 'ðŸ¿', name: 'Snacks' },
+  { icon: 'ðŸœ', name: 'Instant Food' },
+  { icon: 'ðŸ°', name: 'Sweet Tooth' },
+  { icon: 'ðŸª', name: 'Bakery' },
+  { icon: 'â˜•', name: 'Tea & Coffee' },
+  { icon: 'ðŸš', name: 'Rice & Atta' },
+  { icon: 'ðŸŒ¶ï¸', name: 'Masala & Oil' },
 ]
 
 
@@ -32,12 +32,12 @@ interface ProductItem {
 }
 
 const products: any = [
-  { id: '1', icon: '🥛', name: 'Amul Full Cream Milk', weight: '500 ml', deliveryTime: '8 min', price: 34 },
-  { id: '2', icon: '🍞', name: 'Britannia Bread', weight: '400 g', deliveryTime: '8 min', price: 45 },
-  { id: '3', icon: '🧈', name: 'Amul Butter', weight: '100 g', deliveryTime: '8 min', price: 58 },
-  { id: '4', icon: '🥚', name: 'Farm Fresh Eggs', weight: '6 pcs', deliveryTime: '8 min', price: 72 },
-  { id: '5', icon: '🍚', name: 'Daawat Basmati Rice', weight: '1 kg', deliveryTime: '10 min', price: 185 },
-  { id: '6', icon: '🍫', name: 'Dairy Milk Silk', weight: '60 g', deliveryTime: '8 min', price: 80 },
+  { id: '1', icon: 'ðŸ¥›', name: 'Amul Full Cream Milk', weight: '500 ml', deliveryTime: '8 min', price: 34 },
+  { id: '2', icon: 'ðŸž', name: 'Britannia Bread', weight: '400 g', deliveryTime: '8 min', price: 45 },
+  { id: '3', icon: 'ðŸ§ˆ', name: 'Amul Butter', weight: '100 g', deliveryTime: '8 min', price: 58 },
+  { id: '4', icon: 'ðŸ¥š', name: 'Farm Fresh Eggs', weight: '6 pcs', deliveryTime: '8 min', price: 72 },
+  { id: '5', icon: 'ðŸš', name: 'Daawat Basmati Rice', weight: '1 kg', deliveryTime: '10 min', price: 185 },
+  { id: '6', icon: 'ðŸ«', name: 'Dairy Milk Silk', weight: '60 g', deliveryTime: '8 min', price: 80 },
 ]
 
 const serviceBanners = [
@@ -55,7 +55,7 @@ export default function Home() {
     const existingItem = items.find(item => item.id === product.id)
     if (existingItem) {
       updateQty(product.id, 1)
-      showToast(`Updated ${product.name} in cart`, '🛒')
+      showToast(`Updated ${product.name} in cart`, 'ðŸ›’')
     } else {
       addItem({
         id: product.id,
@@ -64,7 +64,7 @@ export default function Home() {
         weight: product.weight,
         price: product.price
       })
-      showToast(`Added ${product.name} to cart`, '🛒')
+      showToast(`Added ${product.name} to cart`, 'ðŸ›’')
     }
   }
 
@@ -72,7 +72,7 @@ export default function Home() {
     const existingItem = items.find(item => item.id === id)
     if (existingItem) {
       updateQty(id, 1)
-      showToast(`Updated ${product.name} in cart`, '🛒')
+      showToast(`Updated ${product.name} in cart`, 'ðŸ›’')
     } else {
       addItem({
         id,
@@ -81,7 +81,7 @@ export default function Home() {
         weight: product.weight,
         price: product.price
       })
-      showToast(`Added ${product.name} to cart`, '🛒')
+      showToast(`Added ${product.name} to cart`, 'ðŸ›’')
     }
   }
 
@@ -105,7 +105,7 @@ export default function Home() {
           onClick={() => updateQty(product.id, -1)}
           className="text-white font-bold px-2 hover:bg-red-500 rounded transition"
         >
-          −
+          âˆ’
         </button>
         <span className="text-white font-bold w-4 text-center text-sm">{cartItem.qty}</span>
         <button 
@@ -136,7 +136,7 @@ export default function Home() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 text-center">
           {/* Delivery Badge */}
           <div className="inline-flex items-center gap-2 bg-white/95 px-5 py-2.5 rounded-full shadow-lg mb-6">
-            <span className="text-2xl">⚡</span>
+            <span className="text-2xl">âš¡</span>
             <span className="text-green-600 font-bold text-lg">Delivery in 8 minutes</span>
           </div>
 
@@ -169,7 +169,7 @@ export default function Home() {
                 key={tag}
                 className="bg-black/10 hover:bg-black/20 px-4 py-1.5 rounded-full text-sm font-medium text-gray-800 cursor-pointer transition-all"
               >
-                🔍 {tag}
+                ðŸ” {tag}
               </span>
             ))}
           </div>
@@ -240,7 +240,7 @@ export default function Home() {
                 </Link>
                 <p className="text-xs text-gray-500 mb-3">{product.weight}</p>
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-base sm:text-lg text-gray-900">₹{product.price}</span>
+                  <span className="font-bold text-base sm:text-lg text-gray-900">â‚¹{product.price}</span>
                   <QuantitySelector product={product} />
                 </div>
               </div>
@@ -260,12 +260,12 @@ export default function Home() {
         
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {[
-            { id: 'f1', icon: '🍎', name: 'Fresh Apples', weight: '500 g', deliveryTime: '12 min', price: 149 },
-            { id: 'f2', icon: '🍌', name: 'Bananas', weight: '1 dozen', deliveryTime: '12 min', price: 60 },
-            { id: 'f3', icon: '🍅', name: 'Fresh Tomatoes', weight: '500 g', deliveryTime: '12 min', price: 35 },
-            { id: 'f4', icon: '🥔', name: 'Fresh Potatoes', weight: '1 kg', deliveryTime: '12 min', price: 45 },
-            { id: 'f5', icon: '🧅', name: 'Fresh Onions', weight: '1 kg', deliveryTime: '12 min', price: 55 },
-            { id: 'f6', icon: '🥕', name: 'Fresh Carrots', weight: '500 g', deliveryTime: '12 min', price: 28 },
+            { id: 'f1', icon: 'ðŸŽ', name: 'Fresh Apples', weight: '500 g', deliveryTime: '12 min', price: 149 },
+            { id: 'f2', icon: 'ðŸŒ', name: 'Bananas', weight: '1 dozen', deliveryTime: '12 min', price: 60 },
+            { id: 'f3', icon: 'ðŸ…', name: 'Fresh Tomatoes', weight: '500 g', deliveryTime: '12 min', price: 35 },
+            { id: 'f4', icon: 'ðŸ¥”', name: 'Fresh Potatoes', weight: '1 kg', deliveryTime: '12 min', price: 45 },
+            { id: 'f5', icon: 'ðŸ§…', name: 'Fresh Onions', weight: '1 kg', deliveryTime: '12 min', price: 55 },
+            { id: 'f6', icon: 'ðŸ¥•', name: 'Fresh Carrots', weight: '500 g', deliveryTime: '12 min', price: 28 },
           ].map((product: ProductItem) => {
             const FQuantitySelector = () => {
               const cartItem = items.find(item => item.id === product.id)
@@ -287,7 +287,7 @@ export default function Home() {
                     onClick={() => updateQty(product.id, -1)}
                     className="text-white font-bold px-2 hover:bg-red-500 rounded transition"
                   >
-                    −
+                    âˆ’
                   </button>
                   <span className="text-white font-bold w-4 text-center text-sm">{cartItem.qty}</span>
                   <button 
@@ -317,7 +317,7 @@ export default function Home() {
                   </Link>
                   <p className="text-xs text-gray-500 mb-3">{product.weight}</p>
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-base sm:text-lg text-gray-900">₹{product.price}</span>
+                    <span className="font-bold text-base sm:text-lg text-gray-900">â‚¹{product.price}</span>
                     <FQuantitySelector />
                   </div>
                 </div>
@@ -403,7 +403,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
-            © FreshCart Commerce Private Limited, 2024-2025
+            Â© FreshCart Commerce Private Limited, 2024-2025
           </div>
         </div>
       </footer>

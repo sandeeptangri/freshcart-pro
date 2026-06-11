@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState } from 'react'
 import Image from 'next/image'
@@ -61,15 +61,15 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <h1 className="text-3xl font-bold">{product.name}</h1>
           
           <div className="flex items-center gap-2">
-            <span className="text-yellow-500 font-bold">{product.averageRating || 4.5} ★</span>
+            <span className="text-yellow-500 font-bold">{product.averageRating || 4.5} â˜…</span>
             <span className="text-muted-foreground">({product.totalReviews || 0} reviews)</span>
           </div>
           
           <div className="flex items-baseline gap-3">
-            <span className="text-3xl font-bold">₹{price}</span>
+            <span className="text-3xl font-bold">â‚¹{price}</span>
             {discount > 0 && (
               <>
-                <span className="text-lg text-muted-foreground line-through">₹{mrp}</span>
+                <span className="text-lg text-muted-foreground line-through">â‚¹{mrp}</span>
                 <Badge variant="destructive">{discount}% off</Badge>
               </>
             )}

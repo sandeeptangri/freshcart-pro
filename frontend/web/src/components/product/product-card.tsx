@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
@@ -44,7 +44,7 @@ export function ProductCard({ product }: ProductCardProps) {
               className="object-cover group-hover:scale-105 transition-transform"
             />
           ) : (
-            <div className="flex items-center justify-center h-full text-4xl">🥗</div>
+            <div className="flex items-center justify-center h-full text-4xl">ðŸ¥—</div>
           )}
           
           {product.isOrganic && (
@@ -65,14 +65,14 @@ export function ProductCard({ product }: ProductCardProps) {
           </Link>
           
           <div className="flex items-center gap-1 mt-1">
-            <span className="text-yellow-500">★</span>
+            <span className="text-yellow-500">â˜…</span>
             <span className="text-sm text-muted-foreground">{product.averageRating || 4.5}</span>
           </div>
           
           <div className="flex items-end gap-2 mt-2">
-            <span className="text-lg font-bold">₹{product.sellingPrice}</span>
+            <span className="text-lg font-bold">â‚¹{product.sellingPrice}</span>
             {product.mrp > product.sellingPrice && (
-              <span className="text-sm text-muted-foreground line-through">₹{product.mrp}</span>
+              <span className="text-sm text-muted-foreground line-through">â‚¹{product.mrp}</span>
             )}
           </div>
           
