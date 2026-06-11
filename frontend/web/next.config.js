@@ -1,19 +1,10 @@
-/** @type {import('next').NextConfig} */
+﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  reactStrictMode: true,
+  output: 'export',
+  distDir: 'dist',
   images: {
-    unoptimized: true,
-    domains: ['localhost'],
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: process.env.NEXT_PUBLIC_API_URL ? `${process.env.NEXT_PUBLIC_API_URL}/:path*` : 'http://localhost:8000/api/:path*',
-      }
-    ]
-  },
+    unoptimized: true
+  }
 }
 
 module.exports = nextConfig

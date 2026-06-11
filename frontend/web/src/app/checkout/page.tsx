@@ -1,3 +1,3 @@
-﻿export default function CheckoutPage() {
+export default function CheckoutPage() {
   return <div className="p-8 text-center">Checkout - Coming Soon</div>;
 }
